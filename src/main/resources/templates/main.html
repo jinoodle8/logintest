@@ -73,7 +73,18 @@
             cell.textContent = dayObject.date;
 
             cell.addEventListener("mouseover", function() {
-                cell.textContent = "선택";
+                let scheduleTable = '<table>';
+                for(let i=0; i<4; i++) {
+                    scheduleTable += '<tr>';
+                    for(let j=0; j<6; j++) {
+                        // 각 칸의 id 값을 '날짜-시작시간' 형식으로 설정합니다.
+                        scheduleTable += `<td id="${day}-${i*4+j}" style="width:25px;height:25px;"></td>`;
+                    }
+                    scheduleTable += '</tr>';
+                }
+                scheduleTable += '</table>';
+
+                cell.innerHTML = dayObject.date + scheduleTable;
             });
             cell.addEventListener("mouseout", function() {
                 cell.textContent = dayObject.date;
@@ -86,6 +97,7 @@
             }
 
             currentDate.setDate(currentDate.getDate() + 1);
+
         }
 
         // 선택된 날짜 업데이트
